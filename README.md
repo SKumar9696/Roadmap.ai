@@ -1,4 +1,4 @@
-# Interview Planner
+# Roadmap.ai
 
 An AI-powered interview preparation app. Paste a job description, upload your resume (or write a short self-description), and get a personalised interview plan in about 30 seconds:
 
