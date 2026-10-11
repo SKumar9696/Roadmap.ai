@@ -1,0 +1,104 @@
+@use "./style/theme" as t;
+@use "./style/button.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background-color: t.$bg-page;
+    background-image: radial-gradient(1100px 520px at 50% -12%, t.alpha(t.$blue, 0.13), transparent 70%);
+    background-attachment: fixed;
+    color: t.$text;
+    font-family: t.$font;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+a {
+    color: t.$blue-light;
+}
+
+// Gradient words in headings
+.highlight {
+    @include t.gradient-text;
+}
+
+// Visible keyboard focus everywhere
+:focus-visible {
+    outline: 2px solid t.$blue-light;
+    outline-offset: 2px;
+}
+
+// Thin themed scrollbars (Chrome/Edge + Firefox)
+* {
+    scrollbar-width: thin;
+    scrollbar-color: t.$line-strong transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: t.$line-strong;
+    border-radius: 8px;
+}
+
+// ── Full-page loading state (LoadingScreen component) ────────────────────────
+.loading-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
+    padding: 1.5rem;
+    text-align: center;
+
+    &__spinner {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, transparent 0 25%, t.$blue, t.$cyan, t.$teal);
+        -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+        mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+        animation: spin 0.9s linear infinite;
+    }
+
+    &__text {
+        color: t.$text-soft;
+        font-size: 0.95rem;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}

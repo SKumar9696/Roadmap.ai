@@ -1,0 +1,402 @@
+@use "../../../style/theme" as t;
+
+// ── Page shell ───────────────────────────────────────────────────────────────
+.home-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.25rem 1.5rem 4rem;
+}
+
+// ── Page header ──────────────────────────────────────────────────────────────
+.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+
+    &__bar {
+        @include t.accent-bar(88px);
+        margin-bottom: 0.4rem;
+    }
+
+    h1 {
+        font-size: clamp(1.7rem, 4vw, 2.45rem);
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        line-height: 1.2;
+        color: t.$text;
+    }
+
+    &__sparkle {
+        vertical-align: -0.12em;
+        margin-right: 0.5rem;
+    }
+
+    p {
+        max-width: 34rem;
+        color: t.$text-soft;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+// ── Main card ────────────────────────────────────────────────────────────────
+.interview-card {
+    @include t.card;
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+
+    &__body {
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+        min-height: 470px;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.1rem 1.6rem;
+        border-top: 1px solid t.$line;
+    }
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.82rem;
+    color: t.$text-muted;
+
+    &__icon {
+        color: t.$teal;
+        flex-shrink: 0;
+    }
+
+    &--error {
+        color: t.$bad;
+        font-weight: 500;
+    }
+}
+
+// ── Panels ───────────────────────────────────────────────────────────────────
+.panel-divider {
+    background-color: t.$line;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1.6rem;
+    min-width: 0;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        h2 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: t.$text;
+        }
+
+        .badge {
+            margin-left: auto;
+        }
+    }
+
+    &__icon {
+        @include t.icon-badge(38px);
+    }
+
+    &__field {
+        position: relative;
+        flex: 1;
+        display: flex;
+    }
+
+    &__textarea {
+        @include t.field;
+        flex: 1;
+        min-height: 300px;
+        padding: 0.9rem 1rem 2rem;
+        resize: none;
+
+        &--short {
+            flex: unset;
+            min-height: 84px;
+            padding-bottom: 0.9rem;
+            resize: vertical;
+        }
+    }
+
+    &--right {
+        gap: 0.85rem;
+    }
+}
+
+.char-counter {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.65rem;
+    font-size: 0.72rem;
+    color: t.$text-muted;
+    pointer-events: none;
+}
+
+// ── Badges ───────────────────────────────────────────────────────────────────
+.badge {
+    @include t.pill-badge;
+}
+
+// ── Section label ────────────────────────────────────────────────────────────
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: t.$text;
+}
+
+// ── Dropzone ─────────────────────────────────────────────────────────────────
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1.6rem 1rem;
+    text-align: center;
+    background-color: t.$bg-drop;
+    border: 1.5px dashed t.alpha(t.$blue-light, 0.6);
+    border-radius: t.$radius-md;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+
+    &:hover {
+        border-color: t.$blue-light;
+        background-color: t.$bg-raised;
+    }
+
+    &__icon {
+        color: t.$blue-light;
+        margin-bottom: 0.2rem;
+    }
+
+    &__title {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: t.$text;
+        overflow-wrap: anywhere;
+    }
+
+    &__subtitle {
+        font-size: 0.78rem;
+        color: t.$text-muted;
+    }
+
+    &--selected {
+        border-style: solid;
+        border-color: t.alpha(t.$teal-light, 0.6);
+
+        .dropzone__icon {
+            color: t.$teal-light;
+        }
+    }
+}
+
+// ── OR divider ───────────────────────────────────────────────────────────────
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: t.$text-muted;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background-color: t.$line-strong;
+    }
+}
+
+// ── Self description ─────────────────────────────────────────────────────────
+.self-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+// ── Info box ─────────────────────────────────────────────────────────────────
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background-color: #0a2a56;
+    border: 1px solid t.alpha(t.$blue, 0.6);
+    border-radius: t.$radius-sm;
+
+    &__icon {
+        flex-shrink: 0;
+        color: t.$blue-light;
+        display: flex;
+        margin-top: 1px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: #b8cdf0;
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+}
+
+// ── Generate button ──────────────────────────────────────────────────────────
+.generate-btn {
+    @include t.gradient-button;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+// ── Recent plans ─────────────────────────────────────────────────────────────
+.recent-reports {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+
+    h2 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: t.$text;
+    }
+}
+
+.reports-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.9rem;
+}
+
+.report-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 1rem 1.1rem;
+    text-align: left;
+    background-color: t.$bg-card;
+    border: 1px solid t.$line;
+    border-radius: t.$radius-md;
+    color: t.$text;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+
+    &:hover {
+        border-color: t.alpha(t.$blue-light, 0.6);
+        background-color: t.$bg-field;
+    }
+
+    &__title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.35;
+    }
+
+    &__meta {
+        font-size: 0.78rem;
+        color: t.$text-muted;
+    }
+
+    &__score {
+        margin-top: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.18rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid;
+
+        &--high {
+            color: t.$good;
+            background-color: t.alpha(t.$good, 0.1);
+            border-color: t.alpha(t.$good, 0.35);
+        }
+
+        &--mid {
+            color: t.$warn;
+            background-color: t.alpha(t.$warn, 0.1);
+            border-color: t.alpha(t.$warn, 0.35);
+        }
+
+        &--low {
+            color: t.$bad;
+            background-color: t.alpha(t.$bad, 0.1);
+            border-color: t.alpha(t.$bad, 0.35);
+        }
+    }
+}
+
+// ── Small screens: stack the two panels ──────────────────────────────────────
+@media (max-width: 760px) {
+    .home-page {
+        padding: 1rem 1rem 3rem;
+    }
+
+    .interview-card__body {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-divider {
+        height: 1px;
+    }
+
+    .panel {
+        padding: 1.25rem;
+    }
+
+    .panel__textarea:not(.panel__textarea--short) {
+        min-height: 200px;
+    }
+
+    .interview-card__footer {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 1.25rem;
+    }
+
+    .generate-btn {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        font-size: 0.86rem;
+    }
+}

@@ -1,0 +1,30 @@
+@use "./theme" as t;
+
+.button {
+    font-family: t.$font;
+
+    &.primary-button {
+        @include t.gradient-button;
+    }
+
+    &.ghost-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.5rem 0.9rem;
+        border-radius: t.$radius-sm;
+        border: 1px solid t.$line-strong;
+        background-color: transparent;
+        color: t.$text-soft;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+
+        &:hover {
+            border-color: t.$blue-light;
+            color: t.$text;
+            background-color: t.alpha(t.$blue, 0.1);
+        }
+    }
+}

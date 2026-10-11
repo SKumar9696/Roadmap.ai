@@ -1,0 +1,149 @@
+// ── Theme tokens ──────────────────────────────────────────────────────────────
+// One place for every colour, radius and shadow. Pages pull these in with
+//   @use "<relative path>/style/theme" as t;
+// and then write t.$blue, @include t.gradient-text, etc.
+@use "sass:color";
+
+// Surfaces (darkest → lightest)
+$bg-page:      #071327;
+$bg-card:      #0b1a2f;
+$bg-field:     #0e1f3a;
+$bg-drop:      #0f2241;
+$bg-raised:    #12284a;
+
+// Lines
+$line:         #15294a;
+$line-strong:  #1d3a66;
+
+// Text
+$text:         #e6eef8;
+$text-soft:    #9cbbe5;
+$text-muted:   #7d97c2;
+
+// Brand
+$blue:         #1e75fb;
+$blue-light:   #4f97ff;
+$cyan:         #19a3c8;
+$teal:         #1ac490;
+$teal-light:   #2ee6c5;
+
+// Status (match score + skill-gap severity)
+$good:         #22d3a0;
+$warn:         #f5b74a;
+$bad:          #ff6b81;
+
+$gradient:      linear-gradient(90deg, $blue 0%, $cyan 52%, $teal 100%);
+$gradient-text: linear-gradient(90deg, #2f80fe 0%, #16aafc 45%, #28f1ca 100%);
+
+$radius-lg: 16px;
+$radius-md: 12px;
+$radius-sm: 10px;
+
+$font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+@function alpha($c, $a) {
+    @return color.change($c, $alpha: $a);
+}
+
+// ── Mixins ───────────────────────────────────────────────────────────────────
+@mixin gradient-text {
+    background: $gradient-text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@mixin card {
+    background-color: $bg-card;
+    border: 1px solid $line;
+    border-radius: $radius-lg;
+    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.6), inset 0 1px 0 alpha($blue-light, 0.05);
+}
+
+@mixin field {
+    width: 100%;
+    background-color: $bg-field;
+    border: 1px solid $line-strong;
+    border-radius: $radius-sm;
+    color: $text;
+    font-family: $font;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &::placeholder {
+        color: $text-muted;
+    }
+
+    &:focus {
+        border-color: $blue-light;
+        box-shadow: 0 0 0 3px alpha($blue, 0.22);
+    }
+}
+
+@mixin gradient-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.4rem;
+    border: none;
+    border-radius: $radius-sm;
+    background: $gradient;
+    color: #fff;
+    font-family: $font;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 28px -10px alpha($cyan, 0.7);
+    transition: filter 0.15s, transform 0.1s;
+
+    &:hover {
+        filter: brightness(1.08);
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &:disabled {
+        filter: grayscale(0.4) brightness(0.8);
+        cursor: not-allowed;
+    }
+}
+
+// Small round icon holder used in panel headers
+@mixin icon-badge($size: 38px) {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background-color: alpha($blue, 0.3);
+    border: 1px solid alpha($blue-light, 0.3);
+    color: $blue-light;
+}
+
+// Uppercase pill badge (REQUIRED / BEST RESULTS in the mockup)
+@mixin pill-badge {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.65rem;
+    border-radius: 999px;
+    color: $teal-light;
+    background-color: alpha($teal-light, 0.08);
+    border: 1px solid alpha($teal-light, 0.45);
+    white-space: nowrap;
+}
+
+// The short gradient bar above page headings
+@mixin accent-bar($width: 88px) {
+    width: $width;
+    height: 3px;
+    border-radius: 3px;
+    background: $gradient;
+}
